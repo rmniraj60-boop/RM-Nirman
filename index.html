@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RM Nirman Buildcon Pvt Ltd</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9972B;
+    --gold-light: #E8B84B;
+    --dark: #0D0D0D;
+    --dark2: #161616;
+    --dark3: #1E1E1E;
+    --white: #F5F2ED;
+    --gray: #8A8A8A;
+    --accent: #C9972B;
+    --nav-bg: rgba(13,13,13,0.95);
+    --hero-overlay1: rgba(13,13,13,0.92);
+    --hero-overlay2: rgba(13,13,13,0.6);
+    --hero-overlay3: rgba(13,13,13,0.85);
+    --transition-speed: 0.4s;
+  }
+
+  html.day-mode {
+    --dark: #F7F4EE;
+    --dark2: #EDE9E0;
+    --dark3: #E3DDD2;
+    --white: #1A1A1A;
+    --gray: #555555;
+    --nav-bg: rgba(247,244,238,0.97);
+    --hero-overlay1: rgba(247,244,238,0.88);
+    --hero-overlay2: rgba(247,244,238,0.50);
+    --hero-overlay3: rgba(247,244,238,0.82);
+  }
+
+  body, nav, section, footer, .service-card, .team-card,
+  .why-item, .whyus-box, .form-input, .form-textarea, .footer-bottom {
+    transition: background var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, var(--nav-bg) 0%, transparent 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,151,43,0.15);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--dark);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .logo-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 10px 24px;
+    font-size: 12px !important;
+    letter-spacing: 2px !important;
+    cursor: pointer;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold) !important;
+    color: var(--dark) !important;
+  }
+
+  .nav-cta::after { display: none !important; }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, var(--hero-overlay1) 0%, var(--hero-overlay2) 50%, var(--hero-overlay3) 100%),
+      url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80') center/cover no-repeat;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,151,43,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,151,43,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(201,151,43,0.4);
+    padding: 8px 20px;
+    margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .hero-badge span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 900;
+    line-height: 0.95;
+    margin-bottom: 8px;
+    animation: fadeInUp 0.8s 0.2s ease both;
+  }
+
+  .hero-title-gold {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-title-outline {
+    -webkit-text-stroke: 1px rgba(245,242,237,0.3);
+    color: transparent;
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 3vw, 32px);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+    animation: fadeInUp 0.8s 0.3s ease both;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(245,242,237,0.65);
+    max-width: 520px;
+    margin-bottom: 48px;
+    animation: fadeInUp 0.8s 0.4s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 20px;
+    animation: fadeInUp 0.8s 0.5s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 16px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(245,242,237,0.3);
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* HERO STATS */
+  .hero-stats {
+    position: absolute;
+    bottom: 60px; right: 60px;
+    display: flex;
+    gap: 48px;
+    z-index: 2;
+    animation: fadeInUp 0.8s 0.6s ease both;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 6px;
+  }
+
+  .hero-line {
+    position: absolute;
+    bottom: 0; left: 60px;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+    animation: lineGrow 1s 0.8s ease both;
+  }
+
+  /* SECTIONS */
+  section { position: relative; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 120px 60px;
+    background: var(--dark2);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+
+  .services-desc {
+    color: rgba(245,242,237,0.6);
+    font-size: 16px;
+    line-height: 1.8;
+    padding-top: 20px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--dark3);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+    transform-origin: left;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card:hover {
+    background: #222;
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(201,151,43,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    font-size: 24px;
+    transition: all 0.3s;
+  }
+
+  .service-card:hover .service-icon {
+    border-color: var(--gold);
+    background: rgba(201,151,43,0.1);
+  }
+
+  .service-num {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: rgba(201,151,43,0.06);
+    line-height: 1;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+
+  .service-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .about-img-main {
+    width: 100%;
+    height: 560px;
+    object-fit: cover;
+    filter: grayscale(30%);
+  }
+
+  .about-img-accent {
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 200px; height: 200px;
+    object-fit: cover;
+    border: 4px solid var(--dark);
+    filter: grayscale(20%);
+  }
+
+  .about-gold-line {
+    position: absolute;
+    top: -20px; left: -20px;
+    width: 80px; height: 80px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+  }
+
+  .about-content { padding-right: 20px; }
+
+  .about-features {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .feature-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    color: rgba(245,242,237,0.7);
+    line-height: 1.6;
+  }
+
+  /* TEAM */
+  .team {
+    padding: 120px 60px;
+    background: var(--dark2);
+    text-align: center;
+  }
+
+  .team-header { margin-bottom: 80px; }
+  .team-header .section-label { justify-content: center; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    background: var(--dark3);
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+
+  .team-card:hover { transform: translateY(-6px); background: #222; }
+
+  .team-avatar {
+    width: 90px; height: 90px;
+    border-radius: 0;
+    background: linear-gradient(135deg, var(--gold) 0%, #8B6914 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--dark);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .team-role {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .team-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* PROJECTS */
+  .projects {
+    padding: 120px 60px;
+  }
+
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 300px;
+    gap: 4px;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .project-card:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .project-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(40%) brightness(0.7);
+  }
+
+  .project-card:hover .project-bg {
+    transform: scale(1.05);
+    filter: grayscale(10%) brightness(0.8);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(13,13,13,0.9) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+  }
+
+  .project-type {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  /* WHY US */
+  .whyus {
+    padding: 120px 60px;
+    background: var(--dark2);
+  }
+
+  .whyus-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .whyus-points { margin-top: 40px; }
+
+  .why-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(245,242,237,0.06);
+    transition: all 0.3s;
+  }
+
+  .why-item:hover { padding-left: 8px; }
+
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: rgba(201,151,43,0.25);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 50px;
+  }
+
+  .why-content h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .why-content p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  .whyus-visual {
+    position: relative;
+  }
+
+  .whyus-box {
+    background: var(--dark3);
+    padding: 60px 48px;
+    border: 1px solid rgba(201,151,43,0.15);
+    position: relative;
+  }
+
+  .whyus-box::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 40px;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+
+  .big-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .big-stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 40px;
+  }
+
+  .mini-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(245,242,237,0.08);
+  }
+
+  .mini-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .mini-stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+  }
+
+  .contact-info h2 { margin-bottom: 24px; }
+
+  .contact-desc {
+    color: rgba(245,242,237,0.6);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .contact-details { display: flex; flex-direction: column; gap: 24px; }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(201,151,43,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+
+  .contact-item-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .contact-item-value {
+    font-size: 15px;
+    color: var(--white);
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .form-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .form-input, .form-textarea {
+    background: var(--dark3);
+    border: 1px solid rgba(245,242,237,0.1);
+    color: var(--white);
+    padding: 14px 20px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-textarea { height: 120px; resize: none; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,151,43,0.15);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-top: 20px;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-col ul a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    padding: 24px 60px;
+    background: var(--dark);
+    border-top: 1px solid rgba(245,242,237,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  .footer-bottom span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes lineGrow {
+    from { height: 0; opacity: 0; }
+    to { height: 80px; opacity: 1; }
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 52px;
+    height: 28px;
+    background: var(--dark3);
+    border: 1px solid rgba(201,151,43,0.35);
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.4s ease, border-color 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: var(--gold);
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), background 0.4s ease;
+  }
+
+  html.day-mode .theme-toggle::before {
+    transform: translateX(24px);
+    background: #C9972B;
+  }
+
+  .theme-toggle .toggle-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .toggle-moon { left: 6px; opacity: 1; }
+  .toggle-sun  { right: 5px; opacity: 0.4; }
+
+  html.day-mode .toggle-moon { opacity: 0.3; }
+  html.day-mode .toggle-sun  { opacity: 1; }
+
+  /* DAY MODE overrides */
+  html.day-mode .hero-grid {
+    background-image:
+      linear-gradient(rgba(201,151,43,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,151,43,0.08) 1px, transparent 1px);
+  }
+
+  html.day-mode .service-card { background: #EDE9E0; }
+  html.day-mode .service-card:hover { background: #E3DDD2; }
+  html.day-mode .team-card { background: #EDE9E0; }
+  html.day-mode .team-card:hover { background: #E3DDD2; }
+  html.day-mode .whyus-box { background: #EDE9E0; border-color: rgba(201,151,43,0.2); }
+  html.day-mode .form-input,
+  html.day-mode .form-textarea { background: #EDE9E0; border-color: rgba(0,0,0,0.12); color: #1A1A1A; }
+  html.day-mode .form-input::placeholder,
+  html.day-mode .form-textarea::placeholder { color: #999; }
+  html.day-mode .footer-bottom { background: #E3DDD2; }
+  html.day-mode footer { background: #EDE9E0; border-top-color: rgba(201,151,43,0.2); }
+  html.day-mode .footer-col ul a { color: #666; }
+  html.day-mode .footer-col ul a:hover { color: #1A1A1A; }
+  html.day-mode .nav-cta { color: var(--gold) !important; border-color: var(--gold); }
+  html.day-mode .hero-line { background: linear-gradient(180deg, var(--gold) 0%, transparent 100%); }
+  html.day-mode .about-img-main { filter: grayscale(10%); }
+  html.day-mode .project-bg { filter: grayscale(20%) brightness(0.92); }
+  html.day-mode .project-card:hover .project-bg { filter: grayscale(0%) brightness(1); }
+  html.day-mode .why-item { border-bottom-color: rgba(0,0,0,0.08); }
+  html.day-mode .service-card::before { background: var(--gold); }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,151,43,0.25);
+    padding: 4px;
+    border-radius: 2px;
+  }
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 1px;
+  }
+  .lang-btn.active {
+    background: var(--gold);
+    color: var(--dark);
+    font-weight: 700;
+  }
+  .lang-btn:hover:not(.active) { color: var(--gold); }
+
+  /* DAY/NIGHT TOGGLE */
+  .theme-toggle {
+    width: 52px;
+    height: 28px;
+    background: rgba(201,151,43,0.15);
+    border: 1px solid rgba(201,151,43,0.35);
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.4s, border-color 0.4s;
+    flex-shrink: 0;
+  }
+
+  html.day-mode .theme-toggle {
+    background: rgba(201,151,43,0.25);
+    border-color: rgba(201,151,43,0.6);
+  }
+
+  .theme-toggle-thumb {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--gold);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  html.day-mode .theme-toggle-thumb {
+    transform: translateX(24px);
+  }
+
+  .theme-toggle-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    transition: opacity 0.3s;
+  }
+
+  .icon-moon { left: 6px; opacity: 1; }
+  .icon-sun  { right: 6px; opacity: 0.4; }
+
+  html.day-mode .icon-moon { opacity: 0.4; }
+  html.day-mode .icon-sun  { opacity: 1; }
+
+  /* Day mode - logo text color fix */
+  html.day-mode .logo-main { color: var(--white); }
+  html.day-mode .hero-title-outline {
+    -webkit-text-stroke: 1px rgba(26,26,26,0.3);
+  }
+  html.day-mode .stat-number { color: var(--gold); }
+  html.day-mode .hero-title span:not(.hero-title-gold):not(.hero-title-outline) {
+    color: var(--white);
+  }
+  html.day-mode .project-overlay {
+    background: linear-gradient(0deg, rgba(247,244,238,0.92) 0%, transparent 60%);
+  }
+  html.day-mode .project-name { color: #1A1A1A; }
+  html.day-mode .project-type { color: var(--gold); }
+  html.day-mode .about-img-main { filter: grayscale(20%) brightness(0.95); }
+  html.day-mode .footer-bottom { background: var(--dark2); }
+  html.day-mode .team-name { color: var(--white); }
+  html.day-mode .service-name { color: var(--white); }
+
+  /* Day mode - section labels & text */
+  html.day-mode .section-label { color: var(--gold); }
+  html.day-mode .section-title { color: var(--white); }
+  html.day-mode .hero-badge { border-color: rgba(201,151,43,0.5); }
+  html.day-mode .hero-badge span { color: var(--gold); }
+  html.day-mode .hero-subtitle { color: #666; }
+  html.day-mode .hero-desc { color: rgba(26,26,26,0.7); }
+
+  /* Day mode - stat items */
+  html.day-mode .stat-label { color: #666; }
+  html.day-mode .stat-item { border-color: rgba(201,151,43,0.2); }
+
+  /* Day mode - service cards */
+  html.day-mode .service-card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  html.day-mode .service-num { color: rgba(201,151,43,0.12); }
+  html.day-mode .service-text { color: #555; }
+  html.day-mode .service-icon { border-color: rgba(201,151,43,0.3); }
+
+  /* Day mode - about */
+  html.day-mode .feature-text { color: #555; }
+  html.day-mode .gold-divider { background: var(--gold); }
+
+  /* Day mode - team */
+  html.day-mode .team-role { color: var(--gold); }
+  html.day-mode .team-desc { color: #666; }
+  html.day-mode .team-card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+  /* Day mode - why us */
+  html.day-mode .why-num { color: rgba(201,151,43,0.2); }
+  html.day-mode .why-content h4 { color: var(--white); }
+  html.day-mode .why-content p { color: #666; }
+  html.day-mode .big-stat { color: var(--gold); }
+  html.day-mode .big-stat-label { color: #888; }
+  html.day-mode .mini-stat-num { color: var(--white); }
+  html.day-mode .mini-stat-label { color: #888; }
+  html.day-mode .whyus-box { border-color: rgba(201,151,43,0.25); }
+
+  /* Day mode - contact */
+  html.day-mode .contact-icon { border-color: rgba(201,151,43,0.3); color: var(--gold); }
+  html.day-mode .contact-item-label { color: var(--gold); }
+  html.day-mode .contact-item-value { color: var(--white); }
+  html.day-mode .contact-desc { color: rgba(26,26,26,0.6); }
+  html.day-mode .form-label { color: #888; }
+  html.day-mode .form-input,
+  html.day-mode .form-textarea {
+    background: #fff;
+    border-color: rgba(0,0,0,0.12);
+    color: #1A1A1A;
+  }
+  html.day-mode .form-input::placeholder,
+  html.day-mode .form-textarea::placeholder { color: #aaa; }
+
+  /* Day mode - footer */
+  html.day-mode footer { border-top-color: rgba(201,151,43,0.2); }
+  html.day-mode .footer-brand p { color: #777; }
+  html.day-mode .footer-col h4 { color: var(--gold); }
+  html.day-mode .footer-col ul a { color: #777; }
+  html.day-mode .footer-col ul a:hover { color: #1a1a1a; }
+  html.day-mode .footer-bottom p { color: #888; }
+  html.day-mode .footer-bottom span { color: var(--gold); }
+
+  /* Day mode - nav links */
+  html.day-mode .nav-links a { color: #555; }
+  html.day-mode .nav-links a:hover { color: var(--gold); }
+  html.day-mode .nav-cta { color: var(--gold) !important; border-color: var(--gold); }
+  html.day-mode .logo-sub { color: var(--gold); }
+  html.day-mode .logo-main { color: #1a1a1a; }
+
+  /* Day mode - hero grid */
+  html.day-mode .hero-grid {
+    background-image:
+      linear-gradient(rgba(201,151,43,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,151,43,0.08) 1px, transparent 1px);
+  }
+
+  /* Day mode - lang switcher */
+  html.day-mode .lang-switcher { background: rgba(0,0,0,0.04); }
+  html.day-mode .lang-btn { color: #777; }
+  html.day-mode .lang-btn.active { background: var(--gold); color: #fff; }
+
+  /* Day mode - btn secondary */
+  html.day-mode .btn-secondary { border-color: rgba(26,26,26,0.3); color: #1A1A1A; }
+  html.day-mode .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Day mode - about section gold line */
+  html.day-mode .about-gold-line {
+    border-top-color: var(--gold);
+    border-left-color: var(--gold);
+  }
+
+  /* Day mode - projects section */
+  html.day-mode .projects-header .section-title { color: #1a1a1a; }
+  html.day-mode .projects-header .btn-secondary { color: #1a1a1a; }
+
+  /* Day mode - section label line */
+  html.day-mode .section-label::before { background: var(--gold); }
+
+  /* Day mode - hero text */
+  html.day-mode .hero-title span:not(.hero-title-gold):not(.hero-title-outline) { color: #1a1a1a; }
+  html.day-mode .hero-title-outline { -webkit-text-stroke: 1.5px rgba(26,26,26,0.35); color: transparent; }
+  html.day-mode .hero-line { background: linear-gradient(180deg, var(--gold) 0%, transparent 100%); }
+
+  /* Day mode - section titles throughout */
+  html.day-mode .section-title { color: #1a1a1a; }
+  html.day-mode .services-header .section-title { color: #1a1a1a; }
+  html.day-mode .about-content .section-title { color: #1a1a1a; }
+  html.day-mode .team .section-title { color: #1a1a1a; }
+  html.day-mode .whyus .section-title { color: #1a1a1a; }
+  html.day-mode .contact-info .section-title { color: #1a1a1a; }
+
+  /* Day mode - whyus box text */
+  html.day-mode .whyus-box p { color: #666; }
+
+  /* Day mode - team header */
+  html.day-mode .team-header .section-title { color: #1a1a1a; }
+
+  /* Day mode - scrollbar */
+  html.day-mode ::-webkit-scrollbar-track { background: #ede9e0; }
+
+  /* Day mode - hero line */
+  html.day-mode .hero-line { opacity: 0.6; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* GOLD DIVIDER */
+  .gold-divider {
+    width: 60px; height: 2px;
+    background: var(--gold);
+    margin: 24px 0;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 24px; }
+    .hero-stats { right: 24px; bottom: 40px; gap: 24px; }
+    .stat-number { font-size: 28px; }
+    .services, .about, .team, .projects, .whyus, .contact { padding: 80px 24px; }
+    .services-header, .about, .whyus-inner, .contact { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid, .team-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .project-card:first-child { grid-row: auto; }
+    footer { grid-template-columns: 1fr 1fr; padding: 40px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">RM</div>
+    <div class="logo-text">
+      <span class="logo-main">RM Nirman</span>
+      <span class="logo-sub">Buildcon Pvt. Ltd.</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services" data-en="Services" data-hi="सेवाएं" data-hl="Services">Services</a></li>
+    <li><a href="#about" data-en="About" data-hi="हमारे बारे में" data-hl="About">About</a></li>
+    <li><a href="#projects" data-en="Projects" data-hi="परियोजनाएं" data-hl="Projects">Projects</a></li>
+    <li><a href="#team" data-en="Team" data-hi="टीम" data-hl="Team">Team</a></li>
+    <li><a href="#contact" class="nav-cta" data-en="Contact Us" data-hi="संपर्क करें" data-hl="Baat Karo">Contact Us</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('hi')">HI</button>
+      <button class="lang-btn" onclick="setLang('hl')">हिं-EN</button>
+    </div>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Day/Night">
+      <span class="toggle-icon toggle-moon">🌙</span>
+      <span class="toggle-icon toggle-sun">☀️</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span>Est. 2008 — Delhi • Noida • Bihar • Himachal Pradesh</span></div>
+    <h1 class="hero-title">
+      <span class="hero-title-gold" data-en="Build" data-hi="निर्माण" data-hl="Nirman">Build</span>
+      <span data-en="the" data-hi="से" data-hl="se">the</span>
+      <span class="hero-title-outline" data-en="New" data-hi="नई" data-hl="Nayi">New</span>
+      <span data-en="World" data-hi="दुनिया" data-hl="Duniya">World</span>
+    </h1>
+    <p class="hero-subtitle" data-en="Building Tomorrow, Today" data-hi="कल का निर्माण, आज" data-hl="Kal Ka Nirman, Aaj">Building Tomorrow, Today</p>
+    <p class="hero-desc" 
+      data-en="Residential, Commercial and Infrastructure — we build at every scale. Quality, Trust and Excellence are our three pillars."
+      data-hi="आवासीय, वाणिज्यिक और बुनियादी ढांचा — हम हर स्तर पर निर्माण करते हैं। गुणवत्ता, विश्वास और उत्कृष्टता हमारे तीन स्तंभ हैं।"
+      data-hl="Residential, Commercial aur Infrastructure — hum har scale par nirmaan karte hain. Quality, Trust aur Excellence hamare teen pillars hain.">
+      Residential, Commercial and Infrastructure — we build at every scale. Quality, Trust and Excellence are our three pillars.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary" data-en="Our Projects" data-hi="हमारी परियोजनाएं" data-hl="Hamare Projects">Our Projects</a>
+      <a href="#contact" class="btn-secondary" data-en="Talk to Us" data-hi="बात करें" data-hl="Baat Karo">Talk to Us</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-number">17+</div>
+      <div class="stat-label" data-en="Years Experience" data-hi="वर्षों का अनुभव" data-hl="Saal Ka Anubhav">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100+</div>
+      <div class="stat-label" data-en="Skilled Workers" data-hi="कुशल कर्मचारी" data-hl="Skilled Workers">Skilled Workers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4</div>
+      <div class="stat-label" data-en="States of Operation" data-hi="राज्यों में काम" data-hl="States Mein Kaam">States of Operation</div>
+    </div>
+  </div>
+  <div class="hero-line"></div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label" data-en="What We Do" data-hi="हमारा काम" data-hl="Hamare Kaam">What We Do</div>
+      <h2 class="section-title" data-en="We Build<br>Everything" data-hi="हम सब कुछ<br>बनाते हैं" data-hl="Har Cheez<br>Banate Hain Hum">We Build<br>Everything</h2>
+    </div>
+    <p class="services-desc"
+      data-en="From residential homes to government infrastructure — RM Nirman Buildcon delivers complete construction solutions. Quality and deadlines — both guaranteed."
+      data-hi="आवासीय मकानों से लेकर सरकारी बुनियादी ढांचे तक — हम पूर्ण निर्माण समाधान प्रदान करते हैं।"
+      data-hl="Residential se lekar government infrastructure tak — RM Nirman Buildcon complete construction solutions provide karta hai. Quality aur deadline — dono pe pakka.">
+      From residential homes to government infrastructure — RM Nirman Buildcon delivers complete construction solutions. Quality and deadlines — both guaranteed.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">🏠</div>
+      <h3 class="service-name">Residential Construction</h3>
+      <p class="service-text"
+        data-en="Individual homes, apartments, housing societies — building your dream home is our passion."
+        data-hi="व्यक्तिगत घर, अपार्टमेंट, हाउसिंग सोसाइटी — आपका सपनों का घर बनाना हमारा जुनून है।"
+        data-hl="Individual homes, apartments, housing societies — sapno ka ghar banana hamare liye passion hai.">
+        Individual homes, apartments, housing societies — building your dream home is our passion.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">🏢</div>
+      <h3 class="service-name">Commercial Buildings</h3>
+      <p class="service-text"
+        data-en="Offices, malls, showrooms, warehouses — commercial spaces that take your business forward."
+        data-hi="कार्यालय, मॉल, शोरूम, गोदाम — वाणिज्यिक स्थान जो आपके व्यवसाय को आगे ले जाएं।"
+        data-hl="Offices, malls, showrooms, warehouses — commercial spaces jo aapke business ko aage le jaaye.">
+        Offices, malls, showrooms, warehouses — commercial spaces that take your business forward.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">🌉</div>
+      <h3 class="service-name">Infrastructure</h3>
+      <p class="service-text"
+        data-en="Roads, bridges, government buildings — building the nation's foundation is our pride."
+        data-hi="सड़कें, पुल, सरकारी भवन — देश की नींव बनाना हमारे लिए गर्व की बात है।"
+        data-hl="Roads, bridges, government buildings — desh ki neenv banana hamare liye garv ki baat hai.">
+        Roads, bridges, government buildings — building the nation's foundation is our pride.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">🔧</div>
+      <h3 class="service-name">Renovation & Interiors</h3>
+      <p class="service-text"
+        data-en="Giving old spaces a new look — we are experts in renovation and interior design."
+        data-hi="पुरानी जगह को नया रूप देना — नवीनीकरण और आंतरिक डिज़ाइन में हम माहिर हैं।"
+        data-hl="Purani jagah ko naya look dena — renovation aur interior design mein mahir hain hum.">
+        Giving old spaces a new look — we are experts in renovation and interior design.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">📐</div>
+      <h3 class="service-name">Design & Planning</h3>
+      <p class="service-text"
+        data-en="Architecture, structural design, project planning — complete service from start to finish."
+        data-hi="वास्तुकला, संरचनात्मक डिज़ाइन, परियोजना योजना — शुरुआत से अंत तक पूरी सेवा।"
+        data-hl="Architecture, structural design, project planning — shuruaat se planning tak poori service.">
+        Architecture, structural design, project planning — complete service from start to finish.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">🏗️</div>
+      <h3 class="service-name">Project Management</h3>
+      <p class="service-text"
+        data-en="Budget, timeline, quality — three things we never compromise on."
+        data-hi="बजट, समयसीमा, गुणवत्ता — तीन चीजें जिन पर हम कभी समझौता नहीं करते।"
+        data-hl="Budget, timeline, quality — teen cheezein jinpe hum kabhi compromise nahi karte.">
+        Budget, timeline, quality — three things we never compromise on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <div class="about-gold-line"></div>
+    <img class="about-img-main" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Construction site" />
+    <img class="about-img-accent" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" alt="Building" />
+  </div>
+  <div class="about-content">
+    <div class="section-label" data-en="About Us" data-hi="हमारे बारे में" data-hl="Hamare Baare Mein">About Us</div>
+    <h2 class="section-title" data-en="Construction Means<br>More Than Buildings" data-hi="निर्माण का अर्थ<br>सिर्फ इमारत नहीं" data-hl="Nirman Ka Matlab<br>Sirf Imaarat Nahi">Construction Means<br>More Than Buildings</h2>
+    <div class="gold-divider"></div>
+    <p style="color: rgba(245,242,237,0.65); font-size: 16px; line-height: 1.9;"
+      data-en="In 2008, <strong style='color:var(--gold)'>Ram Iqbal</strong> laid the foundation of RM Nirman with a vision. Today, 17+ years later, <strong style='color:var(--gold)'>Niraj and Arun</strong> are taking that dream further — across Delhi, Noida, Bihar and Himachal Pradesh with 100+ trained workers."
+      data-hi="2008 में <strong style='color:var(--gold)'>राम इकबाल</strong> ने RM Nirman की नींव रखी। आज 17+ वर्षों बाद, <strong style='color:var(--gold)'>निरज और अरुण</strong> उस सपने को आगे ले जा रहे हैं।"
+      data-hl="2008 mein <strong style='color:var(--gold)'>Ram Iqbal</strong> ne ek sapne ke saath RM Nirman ki neenv rakhi. Aaj 17+ saalon baad, <strong style='color:var(--gold)'>Niraj aur Arun</strong> us sapne ko aur aage le ja rahe hain.">
+      In 2008, <strong style="color:var(--gold)">Ram Iqbal</strong> laid the foundation of RM Nirman with a vision. Today, 17+ years later, <strong style="color:var(--gold)">Niraj and Arun</strong> are taking that dream further — across Delhi, Noida, Bihar and Himachal Pradesh with 100+ trained workers.
+    </p>
+    <div class="about-features">
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="ISO Certified Construction Process" data-hi="ISO प्रमाणित निर्माण प्रक्रिया" data-hl="ISO Certified Construction Process">ISO Certified Construction Process</span></div>
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="Experienced Engineers & Architects" data-hi="अनुभवी इंजीनियर और आर्किटेक्ट" data-hl="Experienced Engineers & Architects">Experienced Engineers & Architects</span></div>
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="On-Time Project Delivery" data-hi="समय पर परियोजना डिलीवरी" data-hl="On-Time Project Delivery">On-Time Project Delivery</span></div>
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="Transparent Budget & Billing" data-hi="पारदर्शी बजट और बिलिंग" data-hl="Transparent Budget & Billing">Transparent Budget & Billing</span></div>
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="Government Tender Expertise" data-hi="सरकारी टेंडर विशेषज्ञता" data-hl="Government Tender Expertise">Government Tender Expertise</span></div>
+      <div class="feature-item"><div class="feature-dot"></div><span class="feature-text" data-en="Post-Construction Support" data-hi="निर्माण के बाद सहायता" data-hl="Post-Construction Support">Post-Construction Support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="team-header">
+    <div class="section-label" data-en="Our Leaders" data-hi="हमारे नेता" data-hl="Humara Team">Our Leaders</div>
+    <h2 class="section-title" data-en="Three Leaders,<br>One Vision" data-hi="तीन नेता,<br>एक विजन" data-hl="Teen Log,<br>Ek Vision">Three Leaders,<br>One Vision</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card" style="border: 1px solid rgba(201,151,43,0.3);">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #8B6914 0%, #C9972B 100%);">RI</div>
+      <h3 class="team-name">Ram Iqbal</h3>
+      <div class="team-role" data-en="Founder & Visionary" data-hi="संस्थापक और दूरदर्शी" data-hl="Founder & Visionary">Founder & Visionary</div>
+      <p class="team-desc"
+        data-en="In 2008, he laid the foundation of RM Nirman — his vision lives on across 4 states today."
+        data-hi="2008 में RM Nirman की नींव रखने वाले — उनका सपना आज 4 राज्यों में जीवित है।"
+        data-hl="2008 mein RM Nirman ki neenv rakhne wale — unka sapna aaj 4 states mein zinda hai.">
+        In 2008, he laid the foundation of RM Nirman — his vision lives on across 4 states today.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">N</div>
+      <h3 class="team-name">Niraj</h3>
+      <div class="team-role" data-en="Director & Operations" data-hi="निदेशक और संचालन" data-hl="Director & Operations">Director & Operations</div>
+      <p class="team-desc"
+        data-en="Like a lotus — with purity and excellence, giving 100% to every project."
+        data-hi="कमल की तरह — पवित्रता और उत्कृष्टता के साथ हर परियोजना में 100% देते हैं।"
+        data-hl="Kamal ki tarah — purity aur excellence ke saath har project mein apna 100% dete hain.">
+        Like a lotus — with purity and excellence, giving 100% to every project.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">A</div>
+      <h3 class="team-name">Arun</h3>
+      <div class="team-role" data-en="Director & Business Development" data-hi="निदेशक और व्यवसाय विकास" data-hl="Director & Business Development">Director & Business Development</div>
+      <p class="team-desc"
+        data-en="Like the sunrise — bringing new ideas and innovation, a fresh start every day."
+        data-hi="सूर्योदय की तरह — नए विचार और नवाचार के साथ हर रोज नई शुरुआत।"
+        data-hl="Suryoday ki tarah — naye ideas aur innovation ke saath har roz nayi shuruaat.">
+        Like the sunrise — bringing new ideas and innovation, a fresh start every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="projects-header">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Hamare Kaam<br>Bolte Hain</h2>
+    </div>
+    <a href="#contact" class="btn-secondary">Sabhi Projects Dekho</a>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <img class="project-bg" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Residential Complex" />
+      <div class="project-overlay">
+        <div class="project-type">Residential</div>
+        <div class="project-name">Aashiana Residential Complex</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img class="project-bg" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=80" alt="Commercial" />
+      <div class="project-overlay">
+        <div class="project-type">Commercial</div>
+        <div class="project-name">Business Hub Tower</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img class="project-bg" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Infrastructure" />
+      <div class="project-overlay">
+        <div class="project-type">Infrastructure</div>
+        <div class="project-name">NH Highway Bridge</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img class="project-bg" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Government" />
+      <div class="project-overlay">
+        <div class="project-type">Government</div>
+        <div class="project-name">District Court Building</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img class="project-bg" src="https://images.unsplash.com/photo-1599598425947-5202edd56bdb?w=600&q=80" alt="Interior" />
+      <div class="project-overlay">
+        <div class="project-type">Renovation</div>
+        <div class="project-name">Hotel Grand Renovation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus">
+  <div class="whyus-inner">
+    <div>
+      <div class="section-label" data-en="Why Choose Us" data-hi="हमें क्यों चुनें" data-hl="Kyun Chunein Hume">Why Choose Us</div>
+      <h2 class="section-title" data-en="No Compromise<br>on Quality" data-hi="गुणवत्ता में<br>कोई समझौता नहीं" data-hl="Quality Mein<br>Koi Compromise Nahi">No Compromise<br>on Quality</h2>
+      <div class="whyus-points">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div class="why-content">
+            <h4 data-en="Experience & Expertise" data-hi="अनुभव और विशेषज्ञता" data-hl="Anubhav & Expertise">Experience & Expertise</h4>
+            <p data-en="17+ years of hands-on construction experience. From residential to government projects — experts in all."
+               data-hi="17+ वर्षों का निर्माण अनुभव। आवासीय से सरकारी परियोजनाओं तक — सब में माहिर।"
+               data-hl="17+ saal ka hands-on construction experience. Residential se lekar government projects tak — sab mein mahir.">17+ years of hands-on construction experience. From residential to government projects — experts in all.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div class="why-content">
+            <h4 data-en="On-Time Delivery" data-hi="समय पर डिलीवरी" data-hl="Time pe Delivery">On-Time Delivery</h4>
+            <p data-en="95% of our projects complete within deadline. Time is money — we know this well."
+               data-hi="हमारे 95% प्रोजेक्ट समयसीमा के भीतर पूरे होते हैं।"
+               data-hl="Hamare 95% projects deadline ke andar complete hote hain. Time is money — yeh hum jaante hain.">95% of our projects complete within deadline. Time is money — we know this well.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div class="why-content">
+            <h4 data-en="Transparent Pricing" data-hi="पारदर्शी मूल्य निर्धारण" data-hl="Transparent Pricing">Transparent Pricing</h4>
+            <p data-en="No hidden charges. What we quote, that's what you pay. Full transparency guaranteed."
+               data-hi="कोई छुपे शुल्क नहीं। जो उद्धृत करेंगे, वही लगेगा। पूर्ण पारदर्शिता की गारंटी।"
+               data-hl="Koi hidden charges nahi. Jo quote karenge, wahi lagega. Full transparency guaranteed.">No hidden charges. What we quote, that's what you pay. Full transparency guaranteed.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div class="why-content">
+            <h4 data-en="After-Service Support" data-hi="बिक्री के बाद सहायता" data-hl="After-Service Support">After-Service Support</h4>
+            <p data-en="We stay with you even after project completion. 1 year free maintenance warranty."
+               data-hi="प्रोजेक्ट पूरा होने के बाद भी हम साथ हैं। 1 साल की मुफ्त रखरखाव वारंटी।"
+               data-hl="Project complete hone ke baad bhi hum saath hain. 1 saal ki free maintenance warranty.">We stay with you even after project completion. 1 year free maintenance warranty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="whyus-visual">
+      <div class="whyus-box">
+        <div class="big-stat">95%</div>
+        <div class="big-stat-label" data-en="Client Satisfaction Rate" data-hi="ग्राहक संतुष्टि दर" data-hl="Client Satisfaction Rate">Client Satisfaction Rate</div>
+        <p style="font-size: 14px; color: var(--gray); line-height: 1.8;"
+          data-en="Our clients are our biggest brand ambassadors. Most of our projects come through word of mouth."
+          data-hi="हमारे ग्राहक हमारे सबसे बड़े ब्रांड एंबेसडर हैं।"
+          data-hl="Hamare clients hamare sabse bade brand ambassador hain. Word of mouth se hi hamare zyaadatar projects aate hain.">
+          Our clients are our biggest brand ambassadors. Most of our projects come through word of mouth.
+        </p>
+        <div class="mini-stats">
+          <div>
+            <div class="mini-stat-num">2008</div>
+            <div class="mini-stat-label" data-en="Founded by Ram Iqbal" data-hi="राम इकबाल द्वारा स्थापित" data-hl="Founded by Ram Iqbal">Founded by Ram Iqbal</div>
+          </div>
+          <div>
+            <div class="mini-stat-num">100+</div>
+            <div class="mini-stat-label" data-en="Skilled Workers" data-hi="कुशल कर्मचारी" data-hl="Skilled Workers">Skilled Workers</div>
+          </div>
+          <div>
+            <div class="mini-stat-num">4</div>
+            <div class="mini-stat-label" data-en="States — DL, UP, BR, HP" data-hi="राज्य — DL, UP, BR, HP" data-hl="States — DL, UP, BR, HP">States — DL, UP, BR, HP</div>
+          </div>
+          <div>
+            <div class="mini-stat-num">17+</div>
+            <div class="mini-stat-label" data-en="Years Experience" data-hi="वर्षों का अनुभव" data-hl="Saal Ka Anubhav">Years Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="section-label" data-en="Get In Touch" data-hi="संपर्क करें" data-hl="Sampark Karein">Get In Touch</div>
+    <h2 class="section-title" data-en="Let's Start<br>Your Project" data-hi="अपना प्रोजेक्ट<br>शुरू करें" data-hl="Aapka Project<br>Shuru Karein">Let's Start<br>Your Project</h2>
+    <p class="contact-desc"
+      data-en="No project is too small or too big. We will listen, understand, and give you the best solution. Call us now!"
+      data-hi="कोई भी प्रोजेक्ट छोटा या बड़ा नहीं होता। हम सुनेंगे, समझेंगे और सर्वोत्तम समाधान देंगे।"
+      data-hl="Koi bhi project chhota ya bada nahi hota. Hum sunenge, samjhenge, aur best solution denge. Abhi baat karo!">
+      No project is too small or too big. We will listen, understand, and give you the best solution. Call us now!
+    </p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-item-label" data-en="Operations" data-hi="कार्य क्षेत्र" data-hl="Operations">Operations</div>
+          <div class="contact-item-value">Delhi • Noida • Bihar • Himachal Pradesh</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-item-label" data-en="Phone" data-hi="फोन" data-hl="Phone">Phone</div>
+          <div class="contact-item-value">+91 XXXXX XXXXX</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-item-label" data-en="Email" data-hi="ईमेल" data-hl="Email">Email</div>
+          <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb2b5bdb49ba9b6b5b2a9b6bab5f5b8b4b6">[email&#160;protected]</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-item-label" data-en="Working Hours" data-hi="कार्य समय" data-hl="Working Hours">Working Hours</div>
+          <div class="contact-item-value">Mon–Sat: 9AM – 7PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-en="Your Name" data-hi="आपका नाम" data-hl="Aapka Naam">Your Name</label>
+          <input type="text" class="form-input" placeholder="Full Name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Phone Number" data-hi="फोन नंबर" data-hl="Phone Number">Phone Number</label>
+          <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Email" data-hi="ईमेल" data-hl="Email">Email</label>
+        <input type="email" class="form-input" placeholder="you@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Project Type" data-hi="प्रोजेक्ट का प्रकार" data-hl="Project Type">Project Type</label>
+        <input type="text" class="form-input" placeholder="Residential / Commercial / Infrastructure" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Your Requirements" data-hi="आपकी जरूरत" data-hl="Aapki Zaroorat">Your Requirements</label>
+        <textarea class="form-textarea" placeholder="Tell us about your project..."></textarea>
+      </div>
+      <button class="btn-primary" style="width: 100%; text-align: center; padding: 18px;"
+        data-en="Send Message →" data-hi="संदेश भेजें →" data-hl="Message Bhejein →">
+        Send Message →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">
+      <div class="logo-icon">RM</div>
+      <div class="logo-text">
+        <span class="logo-main">RM Nirman</span>
+        <span class="logo-sub">Buildcon Pvt. Ltd.</span>
+      </div>
+    </div>
+    <p data-en="In 2008, Ram Iqbal laid the foundation. Today Niraj and Arun carry that dream across 4 states — 100+ workers, one team, one vision."
+       data-hi="2008 में राम इकबाल ने नींव रखी। आज निरज और अरुण उस सपने को 4 राज्यों में आगे ले जा रहे हैं।"
+       data-hl="2008 mein Ram Iqbal ne jo neenv rakhi, aaj Niraj aur Arun us sapne ko 4 states mein aage le ja rahe hain — 100+ workers, ek team, ek vision.">
+      In 2008, Ram Iqbal laid the foundation. Today Niraj and Arun carry that dream across 4 states — 100+ workers, one team, one vision.
+    </p>
+  </div>
+  <div class="footer-col">
+    <h4 data-en="Services" data-hi="सेवाएं" data-hl="Services">Services</h4>
+    <ul>
+      <li><a href="#">Residential</a></li>
+      <li><a href="#">Commercial</a></li>
+      <li><a href="#">Infrastructure</a></li>
+      <li><a href="#">Renovation</a></li>
+      <li><a href="#">Design & Planning</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 data-en="Company" data-hi="कंपनी" data-hl="Company">Company</h4>
+    <ul>
+      <li><a href="#" data-en="About Us" data-hi="हमारे बारे में" data-hl="Hamare Baare Mein">About Us</a></li>
+      <li><a href="#" data-en="Our Team" data-hi="हमारी टीम" data-hl="Hamara Team">Our Team</a></li>
+      <li><a href="#" data-en="Projects" data-hi="परियोजनाएं" data-hl="Projects">Projects</a></li>
+      <li><a href="#" data-en="Careers" data-hi="करियर" data-hl="Careers">Careers</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 data-en="Legal" data-hi="कानूनी" data-hl="Legal">Legal</h4>
+    <ul>
+      <li><a href="#" data-en="Privacy Policy" data-hi="गोपनीयता नीति" data-hl="Privacy Policy">Privacy Policy</a></li>
+      <li><a href="#" data-en="Terms of Service" data-hi="सेवा की शर्तें" data-hl="Terms of Service">Terms of Service</a></li>
+      <li><a href="#">Sitemap</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2008–2025 <span>RM Nirman Buildcon Pvt Ltd</span>. All Rights Reserved. Founded by Ram Iqbal.</p>
+  <p>Made with <span>♥</span> in Delhi, India</p>
+</div>
+
+<script>
+  let currentLang = 'en';
+
+  function toggleTheme() {
+    const isDay = document.documentElement.classList.toggle('day-mode');
+    localStorage.setItem('rmtheme', isDay ? 'day' : 'night');
+  }
+
+  (function() {
+    if (localStorage.getItem('rmtheme') === 'day') {
+      document.documentElement.classList.add('day-mode');
+    }
+  })();
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+      if (text) {
+        if (text.includes('<')) el.innerHTML = text;
+        else el.textContent = text;
+      }
+    });
+    document.querySelectorAll('.section-title[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+      if (text) el.innerHTML = text;
+    });
+  }
+</script>
+</body>
+</html>
