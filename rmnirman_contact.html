@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — RM Nirman Buildcon Pvt Ltd</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9972B;
+    --gold-light: #E8B84B;
+    --dark: #0D0D0D;
+    --dark2: #161616;
+    --dark3: #1E1E1E;
+    --white: #F5F2ED;
+    --gray: #8A8A8A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* GRID BG */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,151,43,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,151,43,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,151,43,0.12);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 15px;
+    color: var(--dark);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--white); letter-spacing: 1px;
+  }
+  .logo-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+
+  .nav-back {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--gold); }
+  .nav-back::before { content: '←'; font-size: 14px; }
+
+  /* MAIN LAYOUT */
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 74px;
+  }
+
+  /* LEFT PANEL — Info */
+  .left-panel {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(201,151,43,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,151,43,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .section-badge::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: var(--gold);
+  }
+  .section-badge span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .left-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .left-title .gold { color: var(--gold); }
+  .left-title .outline {
+    -webkit-text-stroke: 1px rgba(245,242,237,0.25);
+    color: transparent;
+  }
+
+  .left-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(245,242,237,0.55);
+    margin-bottom: 48px;
+    max-width: 380px;
+  }
+
+  /* Contact Info Items */
+  .info-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid rgba(201,151,43,0.1);
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .info-item:hover {
+    border-color: rgba(201,151,43,0.3);
+    background: rgba(201,151,43,0.04);
+  }
+
+  .info-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(201,151,43,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+    color: var(--gold);
+    transition: all 0.3s;
+  }
+  .info-item:hover .info-icon {
+    background: rgba(201,151,43,0.1);
+    border-color: var(--gold);
+  }
+
+  .info-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .info-value {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: flex;
+    gap: 0;
+    margin-top: 48px;
+    border-top: 1px solid rgba(201,151,43,0.1);
+    padding-top: 32px;
+  }
+
+  .stat-box {
+    flex: 1;
+    text-align: center;
+    padding: 0 16px;
+    border-right: 1px solid rgba(201,151,43,0.1);
+  }
+  .stat-box:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-lbl {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* RIGHT PANEL — Form */
+  .right-panel {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .form-title::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: rgba(201,151,43,0.2);
+  }
+
+  /* FORM */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .form-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 10px;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .form-group:focus-within .form-label { color: var(--gold); }
+
+  .form-input, .form-textarea, .form-select {
+    background: var(--dark3);
+    border: 1px solid rgba(245,242,237,0.08);
+    border-bottom: 2px solid rgba(245,242,237,0.08);
+    color: var(--white);
+    padding: 16px 20px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: rgba(201,151,43,0.2);
+    border-bottom-color: var(--gold);
+    background: #222;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: rgba(138,138,138,0.5);
+    font-size: 13px;
+  }
+
+  .form-textarea {
+    height: 130px;
+    resize: none;
+    line-height: 1.7;
+  }
+
+  /* Select dropdown */
+  .select-wrapper { position: relative; }
+  .select-wrapper::after {
+    content: '▾';
+    position: absolute;
+    right: 18px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .form-select option { background: var(--dark3); color: var(--white); }
+
+  /* Two column row */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* SUBMIT BUTTON */
+  .btn-submit {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 20px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s;
+    margin-top: 8px;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold-light);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .btn-submit:hover::before { transform: translateX(0); }
+  .btn-submit:hover { transform: translateY(-2px); }
+
+  .btn-submit span, .btn-submit svg { position: relative; z-index: 1; }
+
+  .btn-arrow {
+    width: 18px; height: 18px;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+  .btn-submit:hover .btn-arrow { transform: translateX(4px); }
+
+  /* SUCCESS MESSAGE */
+  .success-msg {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px;
+    gap: 16px;
+    animation: fadeInUp 0.5s ease;
+  }
+
+  .success-icon {
+    width: 64px; height: 64px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--white);
+  }
+
+  .success-sub {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  .btn-reset {
+    margin-top: 16px;
+    background: transparent;
+    border: 1px solid rgba(201,151,43,0.4);
+    color: var(--gold);
+    padding: 12px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-reset:hover { background: rgba(201,151,43,0.1); border-color: var(--gold); }
+
+  /* WhatsApp float */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    width: 52px; height: 52px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    animation: none;
+  }
+
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+    50% { box-shadow: 0 4px 32px rgba(37,211,102,0.6); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .page-wrapper { grid-template-columns: 1fr; }
+    .left-panel { padding: 60px 28px 40px; border-right: none; border-bottom: 1px solid rgba(201,151,43,0.1); }
+    .right-panel { padding: 40px 28px 60px; }
+    nav { padding: 16px 24px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .stats-strip { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-icon">RM</div>
+    <div class="logo-text">
+      <span class="logo-main">RM Nirman</span>
+      <span class="logo-sub">Buildcon Pvt. Ltd.</span>
+    </div>
+  </a>
+  <a class="nav-back" href="#">Back to Home</a>
+</nav>
+
+<!-- PAGE -->
+<div class="page-wrapper">
+
+  <!-- LEFT INFO PANEL -->
+  <div class="left-panel">
+    <div class="section-badge"><span>Get In Touch</span></div>
+
+    <h1 class="left-title">
+      Let's Build<br>
+      <span class="gold">Something</span><br>
+      <span class="outline">Great</span>
+    </h1>
+
+    <p class="left-desc">
+      Koi bhi project chhota ya bada nahi hota. Hum sunenge, samjhenge, aur best solution denge. Abhi baat karo — pehli consultation bilkul free hai!
+    </p>
+
+    <div class="info-list">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Operations</div>
+          <div class="info-value">Delhi • Noida • Bihar • Himachal Pradesh</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Call Us</div>
+          <div class="info-value">+91 XXXXX XXXXX</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value">info@rmnirman.com</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Working Hours</div>
+          <div class="info-value">Monday – Saturday &nbsp;|&nbsp; 9:00 AM – 7:00 PM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-strip">
+      <div class="stat-box">
+        <div class="stat-num">17+</div>
+        <div class="stat-lbl">Years</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100+</div>
+        <div class="stat-lbl">Workers</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4</div>
+        <div class="stat-lbl">States</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">95%</div>
+        <div class="stat-lbl">Satisfied</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="right-panel">
+    <div class="form-title">Send us a message</div>
+
+    <!-- FORM -->
+    <div id="form-wrap">
+      <div class="contact-form">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" id="f-name" placeholder="Full Name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" id="f-phone" placeholder="+91 XXXXX XXXXX" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="f-email" placeholder="you@email.com" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Project Type</label>
+          <div class="select-wrapper">
+            <select class="form-select form-input" id="f-type">
+              <option value="" disabled selected>Select project type...</option>
+              <option>Residential — Ghar / Flat / Villa</option>
+              <option>Commercial — Office / Mall / Showroom</option>
+              <option>Infrastructure — Road / Bridge / Govt</option>
+              <option>Renovation & Interiors</option>
+              <option>Design & Planning Only</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Budget Range</label>
+          <div class="select-wrapper">
+            <select class="form-select form-input" id="f-budget">
+              <option value="" disabled selected>Approximate budget...</option>
+              <option>Under ₹10 Lakh</option>
+              <option>₹10 – ₹50 Lakh</option>
+              <option>₹50 Lakh – ₹1 Crore</option>
+              <option>₹1 Crore – ₹5 Crore</option>
+              <option>Above ₹5 Crore</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your Requirements</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Tell us about your project..."></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">
+          <span>Send Message</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-msg" id="success-msg">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Message Sent!</div>
+      <p class="success-sub">Shukriya aapka. Hum 24 ghante ke andar aapse sampark karenge.<br>Thank you for reaching out to RM Nirman Buildcon.</p>
+      <button class="btn-reset" onclick="resetForm()">Send Another Message</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a class="whatsapp-float" href="https://wa.me/91XXXXXXXXXX" target="_blank" title="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+
+    if (!name) {
+      document.getElementById('f-name').focus();
+      document.getElementById('f-name').style.borderBottomColor = '#e24b4a';
+      setTimeout(() => document.getElementById('f-name').style.borderBottomColor = '', 2000);
+      return;
+    }
+    if (!phone) {
+      document.getElementById('f-phone').focus();
+      document.getElementById('f-phone').style.borderBottomColor = '#e24b4a';
+      setTimeout(() => document.getElementById('f-phone').style.borderBottomColor = '', 2000);
+      return;
+    }
+
+    // Animate button
+    const btn = document.querySelector('.btn-submit');
+    btn.innerHTML = '<span>Sending...</span>';
+    btn.style.opacity = '0.8';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      const s = document.getElementById('success-msg');
+      s.style.display = 'flex';
+    }, 1200);
+  }
+
+  function resetForm() {
+    document.getElementById('form-wrap').style.display = 'block';
+    document.getElementById('success-msg').style.display = 'none';
+    document.querySelector('.btn-submit').innerHTML = '<span>Send Message</span><span class="btn-arrow">→</span>';
+    document.querySelector('.btn-submit').disabled = false;
+    document.querySelector('.btn-submit').style.opacity = '1';
+    ['f-name','f-phone','f-email','f-msg'].forEach(id => document.getElementById(id).value = '');
+  }
+</script>
+
+</body>
+</html>
